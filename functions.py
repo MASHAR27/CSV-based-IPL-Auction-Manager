@@ -1,36 +1,37 @@
 import csv
 from pathlib import Path
 
-records_path = Path(__file__).parent/"students.csv"
-def read_records():
-    """ Displays the current student records in the CSV file """
+ipl_path = Path(__file__).parent/"ipl.csv"
+
+def search_cricketer():
+    """ This functions asks the user for the cricketer's name then removes white-space and lowercaps for comparison with our records"""
+    name_for_search = input("Please enter the cricketer's name you want to search for in the IPL Auction:  ").strip().lower()
+    if name_for_search == "":
+        print("Name can't be empty of the cricketer")
+        return None
     try:
-        with open(records_path, "r") as file:
-            csv_read = csv.reader(file)
-            for row in csv_read:
-                        print(row[0])
-                        print(row[1])
-                        print(row[2])
-                        print(row[3])
-                        print()
+        with  open(ipl_path,"r") as file:
+            name_reader = csv.reader(file)
+            next(name_reader)
+            for row in name_reader:
+                if name_for_search in row[0].lower():
+                    print(f"Found {name_for_search}! ")
+                    print(f"Age is {row[1]}")
+                    print(f"IPL team is {row[2]}")
+                    print(f"Total number of IPL matches played:  {row[3]}")
+                    print(f"International Team is  {row[4]}")
+                    print(f"Has played international cricket?  {row[5]}")
+                    print(f"Auction price:  {row[6]}")
+                    return None
+                
+            print(f"Couldn't fine {name_for_search} in the records!")
+            return None              
+                    
     except FileNotFoundError:
-        print("Your csv student archive file couldn't be found")
-        return None
-    else:
-        print()    
-        print("That's all the student's")
+        print("Couldn't find the file which contained IPL auction records and info")
         return None
     
     
-def write_records(record_list):
-    """Takes in a list of string which has 4 fields related to the student record """
-    with open(records_path,"w") as file:
-             csv_writer = csv.writer(file)
-             csv_writer.writerow(record_list)
-    print("Saved the student record in csv file!")
-    return None
-          
-            
+    
                 
 
-    
