@@ -108,5 +108,64 @@ def filter_by_team():
                     
                     
                     
+def add_cricketer():
+    """Asks the user for a cricketers info one by one and then adds it to the csv file's records """ 
+    print("Please enter the cricketer's field one by one that you want to add to the records")   
+    cricketer = []       
+    name = input("Enter the cricketer's name:  ").strip()
+    if name == "":
+        print("Name can't be empty")
+        return None 
+    cricketer.append(name)
+    age = input("Enter the cricketer's age: ").strip()
+    if not age.isdigit():
+        print("Age should be a numeric whole value")
+        return None
+    if int(age) <= 0:
+        print("Cricketer's age must be a valid age not negative or zero")
+        return None
+    cricketer.append(age)
+    ipl_team = input("Enter the ipl team's abbrieviation").strip()
+    if ipl_team == "":
+            print("Team name can't be empty")
+            return None 
+    cricketer.append(ipl_team)
+    ipl_matches = input("Enter the number of IPL matches they played: ")
+    if ipl_matches == "":
+        ipl_matches = "0"
+    if not ipl_matches.isdigit():
+        print("IPL matches must be numeric value")
+        return None
+    if int(ipl_matches)<0:
+        print("IPL matches must be greater than or equal to 0")
+        return None
+    cricketer.append(ipl_matches)  
+    intl_team = input("Enter their international team: ").strip()
+    if intl_team == "":
+        print("International Team can't be empty")
+        return None
+    cricketer.append(intl_team)
+    int_debut = input("Have they played International cricket? Enter only True or False").strip()
+    if int_debut == "":
+        print("It can't be empty , please enter True or False")
+        return None
+    if int_debut != "True" and int_debut != "False":
+        print("Please enter True or False only")
+        return None
+    cricketer.append(int_debut)
+    auc_price = input("Please enter the auction price of the cricketer:  ").strip()
+    if not auc_price.isdigit():
+        print("Auction price must be a number")
+        return None
+    if int(auc_price)<=0:
+        print("Auction price must be greater than zero atleast")
+        return None
+    cricketer.append(auc_price)
+    with open(ipl_path,"a") as file:
+            crick_adder = csv.writer(file)
+            crick_adder.writerow(cricketer)
+    print(f"Added {cricketer[0]} successfully to the csv file")          
             
-                 
+     
+      
+        
