@@ -169,3 +169,171 @@ def add_cricketer():
      
       
         
+def update_cricketer():
+    """Finds an existing cricketer record and then modifies their info and then rewrites the new updated info  """
+    upd_name = input("Please enter the cricketer's name who's record you want to update: ").strip().lower()
+    if upd_name == "":
+        print("Name can't be empty")
+        return None
+    try :
+      # first I want to store the original records in a variable to update and write to later
+      found = False
+      with open(ipl_path,"r") as file:
+          storer = csv.reader(file)
+          orignal_record = list(storer)
+      for record in orignal_record:
+          if record and record[0].lower().strip() == upd_name:
+              found = True
+              print("Choose the value that you want to replace ")
+              print("Enter 0 for changing the cricketer's name")
+              print("Enter 1 for updating the cricketer's age")
+              print("Enter 2 for updating the cricketer's  IPL team")
+              print("Enter 3 for updating the cricketer's number of IPL matches")
+              print("Enter 4 for updating the cricketer's  international team")
+              print("Enter 5 for updating whether the cricketer has played international cricketer or not")
+              print("Enter 6 for updating the cricketer's Auction price")
+              option = input("Please choose from the above to update the fields: ").strip()
+              if option == "":
+                  print("Option can't be empty")
+                  return None
+              match option:
+                  case "0":
+                      new_name = input(f"Please enter the new name of {record[0]} ").strip()
+                      if new_name == "":
+                          print("New name can't be empty")
+                          return None
+                      record[0] = new_name
+                      with open(ipl_path,"w") as file:
+                          new_writer = csv.writer(file)
+                          new_writer.writerows(orignal_record)
+                      print("Successfully updated the new name for the cricketer!")
+                  case "1":
+                      new_age = input("Please enter the new age: ").strip()
+                      if new_age == "":
+                          print("New age can't be empty")
+                          return None
+                      if  not new_age.isdigit():
+                          print("The new age must be a numeric value")
+                          return None
+                      if int(new_age) <=0:
+                          print("New Age must be at least greater than 0")
+                          return None
+                      record[1] =  new_age
+                      with open(ipl_path,"w") as file:
+                          writer = csv.writer(file)
+                          writer.writerows(orignal_record)
+                      print("Successfully updated the cricketer's age") 
+                  case "2":
+                      new_ipl = input("Please enter the abbrieviation of the new IPl team you want for this player: ").strip()
+                      if new_ipl == "":
+                          print("New IPL team can't be empty")
+                          return None
+                      record[2] = new_ipl
+                      with open(ipl_path,"w") as file:
+                          writer = csv.writer(file)
+                          writer.writerows(orignal_record)
+                      print("Successfully updated the new IPL team for the cricketer!")    
+                  case "3":
+                      new_matches = input("Enter the new number of IPL matches:  ").strip()
+                      if new_matches == "":
+                           print("The number of matches can't be empty")
+                           return None
+                      if  not new_matches.isdigit():
+                          print("The number of matches must be a numeric value")
+                          return None
+                      if int(new_matches) <0:
+                          print("New number of matches must be zero or a positive number")
+                          return None
+                      record[3] = new_matches
+                      with open(ipl_path,"w") as file:
+                           writer = csv.writer(file)
+                           writer.writerows(orignal_record)
+                      print("Successfully updated the number of IPL matches for the cricketer!")  
+                  case "4":
+                      new_intl_team = input("Enter the new international team:  ").strip()
+                      if new_intl_team == "":
+                           print("New International team can't be empty")
+                           return None
+                      record[4] = new_intl_team
+                      with open(ipl_path,"w") as file:
+                          writer = csv.writer(file)
+                          writer.writerows(orignal_record)
+                      print("Successfully updated the new International team for the cricketer!")       
+                  case "5":
+                      played_intl = input("Enter the new True or False for whether the cricketer has played international cricket or not:  ").strip()
+                      if played_intl == "":
+                          print("It can't be empty , please enter True or False")
+                          return None
+                      if played_intl != "True" and played_intl != "False":   
+                          print("Please enter True or False only") 
+                          return None    
+                      record[5] = played_intl
+                      with open(ipl_path,"w") as file: 
+                          writer = csv.writer(file)    
+                          writer.writerows(orignal_record)                
+                      print("Successfully updated whether the cricketer has played International cricket or not!")                             
+                  case "6":
+                      auc_price = input("Enter the new auction price:  ").strip() 
+                      if auc_price == "":
+                          print("New Auction price can't be empty")   
+                          return None                         
+                      if not auc_price.isdigit():
+                         print("The new auction price must be a numeric value")  
+                         return None
+                      if int(auc_price) <=0:  
+                        print("New auction price must be at least greater than 0")    
+                        return None                 
+                      record[6] =  auc_price 
+                      with open(ipl_path,"w") as file:
+                           writer = csv.writer(file)
+                           writer.writerows(orignal_record) 
+                      print("Successfully updated the cricketer's auction price")                                                
+                  case _:
+                      print("Please only enter from the available options")
+                      
+      if not found:
+          print(f"Couldn't find {upd_name}")
+          return None      
+    except FileNotFoundError:
+        print("Couldn't find the file which contained IPL auction records and info")
+        return None 
+                                                    
+                                                
+                                           
+                                                
+                                               
+                                           
+                                               
+                                               
+                                           
+                                            
+                                            
+                                
+                                               
+                                               
+                                              
+                                       
+                      
+                       
+                                               
+                                                
+                        
+                                               
+                                                
+                                            
+                      
+                                               
+                                                
+                                           
+                                                
+                                                
+                                         
+                                                
+                                                
+                          
+                                                    
+                                    
+                          
+                          
+                              
+              
