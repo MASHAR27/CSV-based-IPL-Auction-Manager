@@ -75,36 +75,6 @@ def filter_by_auction_price():
             return None               
                     
             
-def filter_by_team():
-    """ Retrieves all the player's who match the team's abbrieviation that the user enters """
-    team_name = input("Enter the IPL team's abbrieviation who's players you want to search for, etc: rcb,MI :  ").strip().lower()
-    if team_name == "":
-        print("Team name can't be empty")
-        return None
-    try:
-        found_atl_player = False
-        with open(ipl_path,"r") as file:
-            team_searcher = csv.reader(file)
-            next(team_searcher)
-            for row in team_searcher:
-                if team_name == row[2].lower():
-                    found_atl_player = True
-                    print(f"Name is {row[0]}")
-                    print(f"Age is {row[1]}")
-                    print(f"Total number of IPL matches played:  {row[3]}")
-                    print(f"International Team is  {row[4]}")
-                    print(f"Has played international cricket?  {row[5]}")
-                    print(f"Auction price:  {row[6]}")
-                    print()
-            if found_atl_player:
-                    print(f"These are all the player in {team_name}")
-                    return None
-            else:
-                print(f"No players in {team_name}")
-    except  FileNotFoundError:
-        print("Couldn't find the file which contained IPL auction records and info")
-        return None        
-                            
                     
                     
                     
@@ -166,8 +136,7 @@ def add_cricketer():
             crick_adder.writerow(cricketer)
     print(f"Added {cricketer[0]} successfully to the csv file")          
             
-     
-      
+
         
 def update_cricketer():
     """Finds an existing cricketer record and then modifies their info and then rewrites the new updated info  """
