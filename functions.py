@@ -329,7 +329,31 @@ def delete_cricketer():
            
                     
                     
-                    
+def filter_by_team():
+    """ Prints all the cricketers belonging to a specific IPL team  """         
+    team = input("Please enter the IPL team's abbrieviation that you want to view each cricketer who plays for them : ").strip().lower()
+    if team == "":
+        print("Team name can't be empty")
+        return None
+    found_them = False
+    try:
+        with open(ipl_path,"r") as file:
+            searcher = csv.reader(file)
+            searchlist = list(searcher)
+        for row in searchlist:
+            if row and row[2].lower().strip() == team:
+                found_them = True
+                print(f"{row[0]} is in {team }")
+        
+        if  found_them:
+            print("Those are all the players!")
+        else:
+            print("Sorry no players are part of that team")
+    except FileNotFoundError:
+         print("Couldn't find the file which contained IPL auction records and info")
+                      
+                
+                       
     
     
                                                                                            
