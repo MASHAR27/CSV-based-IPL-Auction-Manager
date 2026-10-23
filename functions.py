@@ -299,7 +299,40 @@ def update_cricketer():
         return None 
                                                     
                                                 
-                                           
+def delete_cricketer():
+    """ Searches if a given cricketer's name exists in the csv file, then deletes that cricketer's record """ 
+    del_cric = input("Please enter the name of the cricketer that you want to delete from the archives:  ").strip().lower()
+    found = False
+    if del_cric == "":
+        print("Name can't be empty")
+        return None
+    try:
+        with open(ipl_path,"r") as file:
+            csvread = csv.reader(file)
+            csv_info = list(csvread)
+            for row in csv_info:
+                if  row and row[0].lower().strip() == del_cric:
+                    found = True
+                    csv_info.remove(row)
+                    break
+            if found:
+                with open(ipl_path,"w") as file:
+                    new_writer = csv.writer(file)
+                    new_writer.writerows(csv_info)
+                print("Successfully deleted the cricketer from the records")
+            else:
+                print("Couldn't find the cricketer you wanted to delete")       
+                                     
+       
+    except FileNotFoundError:
+            print("Couldn't find the file which contained IPL auction records and info")
+           
+                    
+                    
+                    
+    
+    
+                                                                                           
                                                 
                                                
                                            
