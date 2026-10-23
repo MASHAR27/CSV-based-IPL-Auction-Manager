@@ -354,7 +354,122 @@ def filter_by_team():
                       
                 
                        
-    
+def sort_cricketers():
+    """ Prints the cricketer's by age, IPL matches, or auction price  """  
+    print("Choose from below options how to want the records to be sorted and then displayed as: ")
+    print(" 1 for by Age")
+    print(" 2 for by Number of Matches")
+    print(" 3 for by Auction price")
+    option = input().strip()
+    if option not in ["1","2","3"]:
+        print("Please select only from the given options")
+        return None
+    match option:
+        case "1":
+            print("Enter if you want the age by ascending or descending order of the cricketer: ")
+            age_asc = input("Enter A for ascending or D for descending: ").strip().upper()
+            if age_asc not in ["A","D"]:
+                print("Only enter A or D")
+                return None
+            try:
+                with open(ipl_path,"r") as file:
+                    dataread = csv.reader(file)
+                    next(dataread)
+                    datlist = list(dataread)
+                if age_asc == "A":
+                    datlist.sort(key=lambda row: int(row[1]))
+                    print("Cricketer's records sorted by Ascending Age: ")
+                    for row in datlist:
+                        print(row)
+                else:
+                    datlist.sort(key=lambda row: int(row[1]), reverse=True)
+                    print("Cricketer's records sorted by Descending Age: ")
+                    for row in datlist:
+                        print(row)
+            except FileNotFoundError:
+                 print("Couldn't find the file which contained IPL auction records and info")  
+                 return None
+        case "2":
+             print("Enter if you want the number of matches sorted by ascending or descending order of the cricketers: ")
+             age_asc = input("Enter A for ascending or D for descending: ").strip().upper()
+             if age_asc not in ["A","D"]:
+                 print("Only enter A or D")
+                 return None
+             try:
+                 with open(ipl_path,"r") as file:
+                     dataread = csv.reader(file)
+                     next(dataread)
+                     datlist = list(dataread)
+                 if age_asc == "A":
+                    datlist.sort(key=lambda row: int(row[3]))
+                    print("Cricketer's records sorted by Ascending number of IPL matches: ")
+                    for row in datlist:
+                        print(row)
+                 else:
+                    datlist.sort(key=lambda row: int(row[3]),reverse=True)
+                    print("Cricketer's records sorted by Descending number of IPL matches: ")
+                    for row in datlist:
+                        print(row)
+                     
+                    
+                          
+                                            
+             except FileNotFoundError:
+                print("Couldn't find the file which contained IPL auction records and info") 
+                return None     
+        case _:
+            print("Enter if you want the Auction Price sorted by ascending or descending order of the cricketers: ")
+            age_asc = input("Enter A for ascending or D for descending: ").strip().upper()
+            if age_asc not in ["A","D"]:
+                print("Only enter A or D")
+                return None
+            try:
+                with open(ipl_path,"r") as file:
+                      dataread = csv.reader(file)
+                      next(dataread)
+                      datlist = list(dataread)
+                if age_asc == "A":
+                    datlist.sort(key=lambda row: int(row[6]))
+                    print("Cricketer's records sorted by Ascending number of Auction Price: ")
+                    for row in datlist:
+                        print(row)
+                                    
+                                   
+                else:
+                      datlist.sort(key=lambda row: int(row[6]),reverse=True)
+                      print("Cricketer's records sorted by Descending number of Auction Price: ")
+                      for row in datlist:
+                          print(row)
+                 
+            except FileNotFoundError:
+                            print("Couldn't find the file which contained IPL auction records and info") 
+                            return None                   
+                                
+                                
+                                    
+                                                   
+                                      
+                      
+                                   
+                                     
+                                     
+                
+                             
+                             
+            
+                                  
+                                                             
+                    
+                     
+                     
+                 
+                             
+                             
+             
+                                                 
+                                        
+                                            
+            
     
                                                                                            
                                                 
